@@ -124,10 +124,11 @@ protected:
 class TurnOffR2L : public SingleL2R {
 protected:
     void Init() {
-        value = 255;
+        value = (1<<n)-1;
     }
-
-
+	bool EOP() override {
+		return value == (((1<<n)-1)<<n);
+	}
 };
 
 int main() {
@@ -138,6 +139,6 @@ int main() {
 	TurnOnL2R().play();
 	TurnOffL2R().play();
 	TurnOnR2L().play();
-	TurnOffL2R().play();
+	TurnOffR2L().play();
 	return 0;
 }
